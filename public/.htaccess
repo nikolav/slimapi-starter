@@ -1,0 +1,17 @@
+# /servis.nikolav.rs/public/.htaccess
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # If the requested file or directory exists, serve it directly
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Otherwise, send everything to index.php (Slim front controller)
+    RewriteRule ^ index.php [QSA,L]
+</IfModule>
+
+# Optional but nice:
+# Disable directory listing
+Options -Indexes

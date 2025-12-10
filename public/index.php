@@ -28,7 +28,7 @@ $app->add(new CorsMiddleware());
 // Default root route
 $app->get('/', function (Request $request, Response $response) {
     $data = [
-        'status' => 'ok'
+        'status' => 'ok:2'
     ];
 
     $payload = json_encode($data, JSON_UNESCAPED_UNICODE);
