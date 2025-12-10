@@ -23,8 +23,6 @@ $app->options('/{routes:.+}', function ($request, $response) {
 // Add CORS middleware
 $app->add(new CorsMiddleware());
 
-
-
 // Default root route
 $app->get('/', function (Request $request, Response $response) {
     $data = [
