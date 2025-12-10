@@ -2,7 +2,7 @@
 
 namespace App\Routes;
 
-use App\Models\Main;
+// use App\Models\Main;
 use App\Utils\Utils;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -20,7 +20,7 @@ class RouteHome
         $data = [
             'status'   => 'ok',
             'app:name' => $_ENV['APP_NAME'],
-            'main:all' => Main::all()->toJson(),
+            // 'main:all' => Main::all()->toJson(),
         ];
         return Utils::json_response($response, $data);
       });
