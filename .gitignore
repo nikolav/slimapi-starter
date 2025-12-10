@@ -98,3 +98,6 @@ public/uploads/*
 ###############################
 /.env.php
 /.php-cs-fixer.cache
+
+src/config/firebase/service_account.json
+cacert.pem

@@ -7,10 +7,18 @@ use App\Middleware\MiddlewareLogRequest;
 use App\Routes\RouteGraphql;
 use App\Routes\RouteHome;
 use App\Utils\Utils;
+use DI\ContainerBuilder;
 use Slim\Factory\AppFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../src/config/env.php';
+
+// setup class resolving
+$containerBuilder = new ContainerBuilder();
+(require __DIR__ . '/../src/config/deps.php')($containerBuilder);
+
+$container = $containerBuilder->build();
+AppFactory::setContainer($container);
 
 // Create App
 $app = AppFactory::create();
