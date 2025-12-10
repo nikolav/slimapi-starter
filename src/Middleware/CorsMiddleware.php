@@ -13,9 +13,9 @@ class CorsMiddleware
     $response = $handler->handle($request);
 
     $response = $response
-        ->withHeader('Access-Control-Allow-Origin', '*')
-        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
-        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+        ->withHeader('Access-Control-Allow-Origin', $_ENV['CORS_ALLOW_ORIGIN'])
+        ->withHeader('Access-Control-Allow-Headers', $_ENV['CORS_ALLOW_HEADERS'])
+        ->withHeader('Access-Control-Allow-Methods', $_ENV['CORS_ALLOW_METHODS']);
 
     if ($request->getMethod() === 'OPTIONS') {
       return $response->withStatus(200);

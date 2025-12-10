@@ -19,3 +19,14 @@ Content-Type: application/json
 }
 
 ###
+
+POST http://localhost:3031/graphql
+Accept: application/json
+Content-Type: application/json
+
+{
+  "query": "mutation { demo(data: { x: 122 }) }"
+}
+
+###
+

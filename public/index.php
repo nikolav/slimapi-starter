@@ -3,7 +3,9 @@
 declare(strict_types=1);
 
 use App\Middleware\CorsMiddleware;
+use App\Routes\RouteGraphql;
 use App\Routes\RouteHome;
+use App\Utils\Utils;
 use Slim\Factory\AppFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -23,10 +25,15 @@ $app->options('/{routes:.+}', function ($request, $response) {
   return $response;
 });
 
-require_once __DIR__ . '/../src/config/db.php';
+if (Utils::toBool($_ENV['DB_INIT'])) {
+  require_once __DIR__ . '/../src/config/db.php';
+}
 
 // routes:home
 RouteHome::register($app);
+
+// routes:graphql
+RouteGraphql::register($app);
 
 // Add CORS middleware
 $app->add(new CorsMiddleware());
