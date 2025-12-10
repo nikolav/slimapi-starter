@@ -9,13 +9,13 @@ https://servis.nikolav.rs
 
 ###
 
-POST http://localhost:3031/foo
+POST https://servis.nikolav.rs/foo
 Accept: application/json
 Content-Type: application/json
 
 {
-  "x:1": 122,
-  "x:2": 333
+  "x": 122,
+  "y": 333
 }
 
 ###
