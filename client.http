@@ -5,13 +5,17 @@ http://localhost:3031
 
 ###
 
+https://servis.nikolav.rs
+
+###
+
 POST http://localhost:3031/foo
 Accept: application/json
 Content-Type: application/json
 
 {
-  "x:1": 1,
-  "x:2": 22
+  "x:1": 122,
+  "x:2": 333
 }
 
 ###
