@@ -2,7 +2,7 @@
 
 namespace App\Routes;
 
-// use App\Models\Main;
+use App\Models\Main;
 use App\Utils\Utils;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -18,17 +18,20 @@ class RouteHome
 
       $group->get('', function (Request $request, Response $response) {
         $data = [
-            'status'   => 'ok',
-            'app:name' => $_ENV['APP_NAME'],
-            // 'main:all' => Main::all()->toJson(),
+          'status'   => 'ok',
+          'app:name' => $_ENV['APP_NAME'],
+          'main:all' =>
+            Utils::toBool($_ENV['DB_INIT'])
+              ? Main::all()->toJson()
+              : null,
         ];
         return Utils::json_response($response, $data);
       });
 
-      $group->post('foo', function (Request $request, Response $response) {
-        $data = $request->getParsedBody() ?? [];
-        return Utils::json_response($response, $data);
-      });
+      // $group->post('foo', function (Request $request, Response $response) {
+      //   $data = $request->getParsedBody() ?? [];
+      //   return Utils::json_response($response, $data);
+      // });
     });
   }
 }

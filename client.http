@@ -9,17 +9,6 @@ https://servis.nikolav.rs
 
 ###
 
-POST https://servis.nikolav.rs/foo
-Accept: application/json
-Content-Type: application/json
-
-{
-  "x": 122,
-  "y": 333
-}
-
-###
-
 POST http://localhost:3031/graphql
 Accept: application/json
 Content-Type: application/json
