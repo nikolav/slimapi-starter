@@ -7,7 +7,7 @@ class DemoMutationResolver
   public function resolve($root, array $args = [])
   {
     return [
-     'status' => 'demo',
+     'status' => 'demo:ok',
      'input'  => $args,
     ];
   }
