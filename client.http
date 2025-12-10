@@ -5,3 +5,13 @@ http://localhost:3031
 
 ###
 
+POST http://localhost:3031/foo
+Accept: application/json
+Content-Type: application/json
+
+{
+  "x:1": 1,
+  "x:2": 22
+}
+
+###
