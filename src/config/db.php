@@ -13,7 +13,7 @@ $capsule->addConnection([
     'charset'   => 'utf8mb4',
     'collation' => 'utf8mb4_unicode_ci',
     'prefix'    => '',
- ]);
+ ], 'default');
 
 // Make Capsule available globally (optional but recommended)
 $capsule->setAsGlobal();

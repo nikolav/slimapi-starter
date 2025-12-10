@@ -4,6 +4,7 @@ $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__ . '/src')
     ->in(__DIR__ . '/public')
     ->in(__DIR__ . '/database')
+    ->exclude('vendor')
     ->name('*.php')
     ->ignoreDotFiles(true)
     ->ignoreVCS(true);

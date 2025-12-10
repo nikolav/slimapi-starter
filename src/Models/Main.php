@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Main extends Model
 {
-  protected $table = 'main';
+  protected $connection = 'default';
+  protected $table      = 'main';
 
   // Fields that can be mass-assigned
   protected $fillable = [
-      'key',
-      'data',
+     'key',
+     'data',
   ];
 
   // cast JSON to array

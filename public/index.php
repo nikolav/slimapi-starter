@@ -23,7 +23,7 @@ $app->options('/{routes:.+}', function ($request, $response) {
   return $response;
 });
 
-require __DIR__ . '/../src/config/db.php';
+require_once __DIR__ . '/../src/config/db.php';
 
 // routes:home
 RouteHome::register($app);

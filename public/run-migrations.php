@@ -12,7 +12,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 require __DIR__ . '/../src/config/env.php';
 
-require __DIR__ . '/../src/config/db.php';
+require_once __DIR__ . '/../src/config/db.php';
 
 require __DIR__ . '/../migrate.php';
 
