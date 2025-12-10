@@ -9,3 +9,9 @@ The project uses:
 - DotEnv configuration
 - Custom middleware (CORS, etc.)
 - Modular route and resolver loading
+
+---
+
+## 🚀 Deployment
+
+Upload **the entire project** to hosting environment under public directory
