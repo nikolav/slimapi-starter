@@ -6,21 +6,13 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 class Utils
 {
-  private static $DEFAULTS_TRUTHY = [
-   true,
-   1, '1',
-   'true', 'TRUE', 'True',
-   'yes', 'YES', 'Yes',
-   'on', 'ON', 'On',
-   'y', 'Y',
-  ];
-  //
+  private static $DEFAULTS_TRUTHY = [true, 1, '1', 'TRUE', 'YES', 'ON', 'Y'];
 
   public static function toBool($value): bool
   {
     // Normalize input if it's a string
     if (is_string($value)) {
-      $value = trim($value);
+      $value = mb_strtoupper(trim($value));
     }
 
     return in_array($value, self::$DEFAULTS_TRUTHY, true);
