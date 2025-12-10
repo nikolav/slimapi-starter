@@ -3,6 +3,7 @@
 namespace App\Routes;
 
 use App\Models\Main;
+use App\Utils\Utils;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
@@ -21,15 +22,12 @@ class RouteHome
             'app:name' => $_ENV['APP_NAME'],
             'main:all' => Main::all()->toJson(),
         ];
-        $response->getBody()->write(json_encode($data));
-        return $response->withHeader('Content-Type', 'application/json');
+        return Utils::json_response($response, $data);
       });
 
       $group->post('foo', function (Request $request, Response $response) {
         $data = $request->getParsedBody() ?? [];
-        $response->getBody()->write(json_encode($data));
-        return $response->withHeader('Content-Type', 'application/json')
-                        ->withStatus(200);
+        return Utils::json_response($response, $data);
       });
     });
   }
