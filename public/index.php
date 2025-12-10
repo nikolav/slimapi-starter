@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Middleware\CorsMiddleware;
+use App\Middleware\MiddlewareLogRequest;
 use App\Routes\RouteGraphql;
 use App\Routes\RouteHome;
 use App\Utils\Utils;
@@ -34,6 +35,11 @@ RouteHome::register($app);
 
 // routes:graphql
 RouteGraphql::register($app);
+
+// logging
+if (Utils::toBool($_ENV['LOGGING_ENABLED'])) {
+  $app->add(new MiddlewareLogRequest());
+}
 
 // Add CORS middleware
 $app->add(new CorsMiddleware());
