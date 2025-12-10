@@ -14,13 +14,8 @@ class Utils
    'on', 'ON', 'On',
    'y', 'Y',
   ];
-  /**
-   * Convert any value into a boolean.
-   *
-   * @param mixed $value
-   * @param array $truthyValues List of values considered "true"
-   * @return bool
-   */
+  //
+
   public static function toBool($value): bool
   {
     // Normalize input if it's a string
