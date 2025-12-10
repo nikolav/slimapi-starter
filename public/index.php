@@ -7,6 +7,7 @@ use App\Routes\RouteHome;
 use Slim\Factory\AppFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../src/config/env.php';
 
 // Create App
 $app = AppFactory::create();
@@ -21,6 +22,8 @@ $app->addBodyParsingMiddleware();
 $app->options('/{routes:.+}', function ($request, $response) {
   return $response;
 });
+
+require __DIR__ . '/../src/config/db.php';
 
 // routes:home
 RouteHome::register($app);

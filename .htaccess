@@ -1,8 +1,9 @@
-# /servis.nikolav.rs/.htaccess
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # If the request is NOT already for /public, send it there
+    RewriteRule ^public/run-migrations\.php$ public/run-migrations.php [L]
+
     RewriteCond %{REQUEST_URI} !^/public/
     RewriteRule ^(.*)$ public/$1 [L]
+
 </IfModule>

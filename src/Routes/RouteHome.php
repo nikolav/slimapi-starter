@@ -16,7 +16,8 @@ class RouteHome
 
       $group->get('', function (Request $request, Response $response) {
         $data = [
-            'status' => 'ok',
+            'status'   => 'ok',
+            'app:name' => $_ENV['APP_NAME'],
         ];
         $response->getBody()->write(json_encode($data));
         return $response->withHeader('Content-Type', 'application/json');

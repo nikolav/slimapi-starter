@@ -8,6 +8,12 @@ if (!isset($_GET['token']) || $_GET['token'] !== $secret) {
   exit;
 }
 
+require __DIR__ . '/../vendor/autoload.php';
+
+require __DIR__ . '/../src/config/env.php';
+
+require __DIR__ . '/../src/config/db.php';
+
 require __DIR__ . '/../migrate.php';
 
-echo 'Migrations executed.';
+echo "Migrations executed.\n";

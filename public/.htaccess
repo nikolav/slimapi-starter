@@ -1,17 +1,95 @@
-# /servis.nikolav.rs/public/.htaccess
-
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # If the requested file or directory exists, serve it directly
-    RewriteCond %{REQUEST_FILENAME} -f [OR]
-    RewriteCond %{REQUEST_FILENAME} -d
-    RewriteRule ^ - [L]
-
-    # Otherwise, send everything to index.php (Slim front controller)
+    # ---------------------------------------------------------
+    # Slim front controller:
+    # If the request is NOT a real file or dir => index.php
+    # ---------------------------------------------------------
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^ index.php [QSA,L]
 </IfModule>
 
-# Optional but nice:
+# -------------------------------------------------------------
 # Disable directory listing
+# -------------------------------------------------------------
 Options -Indexes
+
+# -------------------------------------------------------------
+# Block access to sensitive files
+# -------------------------------------------------------------
+
+# .env, env.* files
+<FilesMatch "^\.env">
+    Require all denied
+</FilesMatch>
+
+# Composer files
+<FilesMatch "^(composer\.(json|lock)|phpunit\.xml|phpcs\.xml|phpstan\.neon)$">
+    Require all denied
+</FilesMatch>
+
+# Generic dotfiles (.git, .ht*, etc.)
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+# Deny access to config, database, migrations, etc. if symlinked or exposed
+RedirectMatch 403 ^/config(/|$)
+RedirectMatch 403 ^/database(/|$)
+RedirectMatch 403 ^/migrations(/|$)
+RedirectMatch 403 ^/storage(/|$)
+RedirectMatch 403 ^/vendor(/|$)
+RedirectMatch 403 ^/tests(/|$)
+
+# -------------------------------------------------------------
+# Basic security headers
+# -------------------------------------------------------------
+<IfModule mod_headers.c>
+    # Prevent MIME sniffing
+    Header always set X-Content-Type-Options "nosniff"
+
+    # Clickjacking protection
+    Header always set X-Frame-Options "SAMEORIGIN"
+
+    # Basic XSS protection (legacy, but harmless)
+    Header always set X-XSS-Protection "1; mode=block"
+
+    # Referrer policy
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Very simple permissions policy (tighten later if needed)
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# -------------------------------------------------------------
+# Cache static assets (CSS, JS, images, fonts, etc.)
+# -------------------------------------------------------------
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    # Images
+    ExpiresByType image/jpeg  "access plus 1 month"
+    ExpiresByType image/png   "access plus 1 month"
+    ExpiresByType image/gif   "access plus 1 month"
+    ExpiresByType image/webp  "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType image/x-icon "access plus 1 year"
+
+    # CSS & JS
+    ExpiresByType text/css              "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+
+    # Fonts
+    ExpiresByType font/ttf   "access plus 1 year"
+    ExpiresByType font/otf   "access plus 1 year"
+    ExpiresByType font/woff  "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+<IfModule mod_headers.c>
+    # Add Cache-Control headers for typical static file extensions
+    <FilesMatch "\.(css|js|jpe?g|png|gif|webp|svg|ico|woff2?|ttf|otf)$">
+        Header set Cache-Control "public, max-age=2592000"  # 30 days
+    </FilesMatch>
+</IfModule>
