@@ -3,6 +3,7 @@
 namespace App\Routes;
 
 use App\Models\Main;
+use App\Service\Firebase;
 use App\Utils\Utils;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -17,6 +18,9 @@ class RouteHome
     $app->group('/', function (RouteCollectorProxy $group) {
 
       $group->get('', function (Request $request, Response $response) {
+        $firebase = Firebase::getInstance();
+        $auth     = $firebase->auth();
+
         $data = [
           'status'   => 'ok',
           'app:name' => $_ENV['APP_NAME'],
@@ -24,6 +28,7 @@ class RouteHome
             Utils::toBool($_ENV['DB_INIT'])
               ? Main::all()->toJson()
               : null,
+          'auth:email' => $auth->getUser($_ENV['AUTH_TEST_UID'])->email,
         ];
         return Utils::json_response($response, $data);
       });
