@@ -1,2 +1,2 @@
 #!/usr/bin/bash
-php -S localhost:3031 -t public 
+php -S localhost:3001 -t public 
