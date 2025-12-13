@@ -3,12 +3,13 @@
 namespace App\Routes;
 
 use App\graphql\GraphQLServer;
+use App\lib\InterfaceRoute;
 use App\Utils\Utils;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
 
-class RouteGraphql
+class RouteGraphql implements InterfaceRoute
 {
   private static ?GraphQLServer $graphqlServer = null;
 

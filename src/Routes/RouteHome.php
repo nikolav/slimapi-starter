@@ -2,6 +2,7 @@
 
 namespace App\Routes;
 
+use App\lib\InterfaceRoute;
 use App\Models\Main;
 use App\Service\Firebase;
 use App\Utils\Utils;
@@ -10,7 +11,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 
-class RouteHome
+class RouteHome implements InterfaceRoute
 {
   public static function register(App $app): void
   {
