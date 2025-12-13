@@ -2,10 +2,8 @@
 
 use App\graphql\resolvers\query\StatusQueryResolver;
 
-$statusQueryResolver = new StatusQueryResolver();
-
 // export query resolvers
 return [
-  // fieldName => [resolverInstance, 'methodName']
- 'status'  => [$statusQueryResolver, 'resolve'],
+ // fieldName => [resolverInstance, 'methodName']
+ 'status'  => [StatusQueryResolver::new(), 'resolve'],
 ];
